@@ -1,6 +1,7 @@
+
+/*
 console.log("DOM Test");
 
-/*-----------------------------------------------------------------------*/
 
 //  getElementById Method:
 const mainHeading = document.getElementById('main-heading');
@@ -17,7 +18,7 @@ basket.style.color = 'green';
 const footer = document.getElementById('thanks');
 footer.innerHTML = '<p>Please visit us again</p>';
 
-/*-----------------------------------------------------------------------*/
+
 
 //  getElementsByClassName Method:
 const fruit = document.getElementsByClassName('fruit');
@@ -27,7 +28,7 @@ for (let i = 0; i < fruit.length; i++) {
   fruit[i].style.fontWeight = 'bold';
 }
 
-/*-----------------------------------------------------------------------*/
+
 
 //  getElementsByTagName Method:
 
@@ -38,7 +39,7 @@ for (let i = 0; i < listItems.length; i++) {
   listItems[i].style.fontStyle = 'italic';
 }
 
-/*-----------------------------------------------------------------------*/
+
 
 // QuerySelector - single element
 // querySelector - using id
@@ -83,7 +84,7 @@ for (let i = 0; i < evenFruitItems.length; i++) {
   evenFruitItems[i].style.backgroundColor = 'brown';
 }
 
-/*-----------------------------------------------------------------------*/
+
 
 //  Creating Elements:
 const subHead = document.createElement('h3');
@@ -101,5 +102,51 @@ const totalFruitsText = document.createTextNode('Total fruits: 4');
 paragraph.appendChild(totalFruitsText);
 paragraph.id = 'fruits-total';
 secondDiv.insertBefore(paragraph, secondDiv.firstChild);
+
+
+
+
+const deleteButtons = document.querySelectorAll('.delete-btn');
+deleteButtons.forEach(button => {
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.classList.add('edit-btn');
+    button.parentNode.appendChild(editButton);
+});
+
+const form = document.querySelector('form');
+const fruitsList = document.querySelector('.fruits');
+
+form.addEventListener('submit', function(event){
+  event.preventDefault(); 
+  const fruitToAdd = document.getElementById('fruit-to-add').value;
+
+  const newLi = document.createElement('li');
+  newLi.textContent = fruitToAdd;
+  newLi.className = 'fruit';
+  
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'x';
+  deleteButton.className = 'delete-btn';
+  newLi.appendChild(deleteButton);
+
+  const editButton = document.createElement('button');
+  editButton.textContent = 'Edit';
+  editButton.classList.add('edit-btn');
+  newLi.appendChild(editButton);
+
+  fruitsList.appendChild(newLi);
+});
+
+fruitsList.addEventListener('click', function(event){
+  if (event.target.classList.contains('delete-btn')) {
+    const fruitToDelete = event.target.parentElement;
+    fruitsList.removeChild(fruitToDelete);
+  }
+});
+
+
+*/
+
 
 
